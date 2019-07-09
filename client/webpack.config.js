@@ -1,20 +1,50 @@
-const path = require('path') // pegar o caminho absoluto
+const path = require('path')
 
 module.exports = {
-    entry: './app-src/app.js', // primeiro modulo que será carregado na minha aplicação
-    output: { // configuraçao do arquivo de bundle gerado no final
+    mode: 'none',
+    entry: './app-src/app.js',
+    output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist') // __dirname é uma variável do JS que pega o diretório atual
+        path: path.resolve(__dirname, 'dist')
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
+              test: /\.m?js$/,
+              exclude: /node_modules/,
+              use: {
+                  loader: 'babel-loader',
+                  options: {
+                      presets: ['@babel/preset-env']
+                  }
+              }
             }
         ]
     }
 }
+
+// const path = require('path')
+
+// module.exports = {
+//   mode: 'none',
+//   entry: './app-src/app.js',
+
+//   output: {
+//     path: path.resolve('dist'),
+//     filename: 'main.js'
+//   },
+//   module: {
+//     rules: [
+//       {
+//         test: /\.m?js$/,
+//         exclude: /node_modules/,
+//         use: {
+//           loader: 'babel-loader',
+//           options: {
+//             presets: ['@babel/preset-env']
+//           }
+//         }
+//       }
+//     ]
+//   }
+// }
